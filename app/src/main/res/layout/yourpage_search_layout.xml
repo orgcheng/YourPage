@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageButton
+        android:id="@+id/yourpage_search_btn"
+        android:layout_width="@dimen/yourpage_search_card_height"
+        android:layout_height="@dimen/yourpage_search_card_height"
+        android:background="@drawable/yourpage_ic_scanner" />
+
+    <TextView
+        android:id="@+id/yourpage_search_text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/yourpage_search_card_height"
+        android:layout_marginLeft="@dimen/yourpage_search_card_margin"
+        android:layout_marginRight="@dimen/yourpage_search_card_margin"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:text="@string/yourpage_search_text"
+        android:textColor="@color/yourpage_textcolor_other"
+        android:textSize="14dp" />
+
+    <ImageButton
+        android:id="@+id/yourpage_search_scanner_btn"
+        android:layout_width="@dimen/yourpage_search_card_height"
+        android:layout_height="@dimen/yourpage_search_card_height"
+        android:background="@drawable/yourpage_ic_scanner" />
+</merge>
