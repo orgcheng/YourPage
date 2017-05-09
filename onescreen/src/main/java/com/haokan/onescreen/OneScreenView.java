@@ -29,6 +29,7 @@ import com.gionee.amisystem.yourpage.common.APP;
 import com.gionee.amisystem.yourpage.common.http.RetrofitManager;
 import com.gionee.amisystem.yourpage.common.utils.GsonUtils;
 import com.gionee.amisystem.yourpage.common.utils.LogUtils;
+import com.gionee.amisystem.yourpage.common.utils.YourPageUtils;
 import com.gionee.amisystem.yourpage.statistics.CardStatisticsInterface;
 import com.gionee.amisystem.yourpage.statistics.StatisticsUtil;
 import com.gionee.yourspage.cardinterface.IGioneeCardViewInterface;
@@ -227,7 +228,9 @@ public class OneScreenView extends LinearLayout implements IGioneeCardViewInterf
 				}
 
 				// TODO 点击更多
-				skipWeb(mMoreClickUrl);
+				if(!YourPageUtils.isFastDoubleClick()) {
+					skipWeb(mMoreClickUrl);
+				}
 				StatisticsUtil.Statistics_Click_Card_More_Button_Times(mContext, mIservice, mCardType);
 //				if (mLoadSuccess) {
 //					mOneScreenConnection.clickMore();
@@ -259,7 +262,9 @@ public class OneScreenView extends LinearLayout implements IGioneeCardViewInterf
 
 	public void refersh() {
 		// TODO 刷新
-		getData();
+		if(!YourPageUtils.isFastDoubleClick()) {
+			getData();
+		}
 //		try {
 //			mOneScreenConnection.refreshOneScreenCard();
 //		} catch (Exception e) {
@@ -383,7 +388,7 @@ public class OneScreenView extends LinearLayout implements IGioneeCardViewInterf
 	@Override
 	public void onRemove() {
 		Log.d(TAG, hashCode() + " onRemove " + Thread.currentThread().getName());
-		mOneScreenConnection.unbindService();
+//		mOneScreenConnection.unbindService();
 	}
 
 	/**

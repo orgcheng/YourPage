@@ -3,6 +3,8 @@ package com.gionee.amisystem.yourpage.view;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.gionee.amisystem.yourpage.common.APP;
@@ -52,14 +54,13 @@ public class YourPageView extends LinearLayout {
 
     private void initChildViews() {
         addCardView();
-        // TODO 添加button
+        addManagerButton();
     }
 
     public void addCardView() {
         if (cardView == null) {
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
             cardView = new OneScreenView(mLauncherContext, mContext);
-            cardView.setLayoutParams(lp);
+            cardView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             addView(cardView, 0);
 
             // TODO 传递用于统计的参数, 此处传入假的数据
@@ -70,9 +71,33 @@ public class YourPageView extends LinearLayout {
             cardView.onResume();
         }
     }
+    public void addManagerButton(){
+        Button button = new Button(mLauncherContext);
+        button.setText("添加或移除卡片");
+        button.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cardView != null){
+                    LogUtils.d("remove cardView");
+                    YourPageView.this.removeView(cardView);
+                    onRemove();
+                }else{
+                    LogUtils.d("add cardView");
+                    addCardView();
+                }
+            }
+        });
+
+        addView(button);
+    }
 
     public void onYourPageRefresh(boolean force) {
         if (!(force || NetWorkUtils.isWifiConnected())) {
+            return;
+        }
+
+        if(cardView == null){
             return;
         }
 
@@ -150,20 +175,17 @@ public class YourPageView extends LinearLayout {
     public void onRemove() {
         // 卡片调用 onRemove
         LogUtils.d("onRemove");
-        cancelRefresh();
+        onPause();
         if (cardView != null) {
             cardView.onRemove();
-            cardView = null;
         }
-
+        cardView = null;
     }
 
     public void onDestroy() {
         // 卡片调用 onDestroy
         LogUtils.d("onDestroy");
-        if (cardView != null) {
-            cardView.onRemove();
-        }
+        onRemove();
 
         // relealse Application from library
         APP.setAppContext(null);
