@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!--内容一级文字,主标题-->
-    <dimen name="yourpage_textsize_content">14dp</dimen>
-
-    <!--内容二级说明文字-->
-    <dimen name="yourpage_textsize_description">12dp</dimen>
-</resources>
