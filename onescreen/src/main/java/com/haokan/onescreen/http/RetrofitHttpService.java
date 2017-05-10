@@ -21,7 +21,7 @@ import retrofit2.http.Url;
  * Created by chenming on 16/8/3.
  */
 public interface RetrofitHttpService {
-    String end_point = "http://118.178.174.227:80/hk-protocol/";
+    String BASE_URL = "http://118.178.174.227:80/hk-protocol/";
 
     @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
     @POST("gionee")
