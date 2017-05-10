@@ -15,7 +15,7 @@ import java.util.Set;
  */
 
 public class SPUtils {
-    private static final String FILE_NAME = "yourpage_data";
+    private static final String FILE_NAME = "yourpage_sp";
 
     public static void clear() {
         SharedPreferences sp = APP.getAppContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);

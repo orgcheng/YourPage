@@ -60,10 +60,10 @@ public class RetrofitManager {
     }
 
     private static <S> S createService(Class<S> serviceClass, OkHttpClient client) {
-        String end_point = "";
+        String baseUrl = "";
         try {
-            Field field1 = serviceClass.getField("end_point");
-            end_point = (String) field1.get(serviceClass);
+            Field field1 = serviceClass.getField("BASE_URL");
+            baseUrl = (String) field1.get(serviceClass);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -71,12 +71,12 @@ public class RetrofitManager {
             e.printStackTrace();
         }
 
-        if (TextUtils.isEmpty(end_point)) {
-            throw new IllegalArgumentException("end_point is not allow empty for " + serviceClass.getSimpleName());
+        if (TextUtils.isEmpty(baseUrl)) {
+            throw new IllegalArgumentException("BASE_URL is not allow empty for " + serviceClass.getSimpleName());
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(end_point)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

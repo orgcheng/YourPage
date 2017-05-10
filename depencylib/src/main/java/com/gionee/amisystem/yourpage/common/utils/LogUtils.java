@@ -13,7 +13,7 @@ import android.util.Log;
  */
 
 public class LogUtils {
-    public static String customTagPrefix = "chengzhen";
+    public static String customTagPrefix = "yourpage";
 
     private LogUtils() {
     }
